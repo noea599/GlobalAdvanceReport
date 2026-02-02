@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Advance Impact Report Request</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        :root {
+            --primary: #E74C3C;      /* Bold red for Global Advance */
+            --secondary: #2C3E50;    /* Deep navy/charcoal */
+            --accent: #F39C12;       /* Warm orange/gold */
+            --dark: #1A252F;         /* Almost black */
+            --light-bg: #F8F9FA;
+            --white: #ffffff;
+            --gray-50: #F8F9FA;
+            --gray-100: #E9ECEF;
+            --gray-200: #DEE2E6;
+            --gray-300: #CED4DA;
+            --gray-700: #495057;
+            --gray-900: #212529;
+            --success: #27AE60;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+            color: var(--gray-900);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #C0392B 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(243, 156, 18, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tagline {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.6rem 1.8rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.3px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 3rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            border-top: 4px solid var(--primary);
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        .section-number {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary) 0%, #C0392B 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* Form Fields */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--gray-700);
+            font-size: 0.95rem;
+        }
+
+        .required {
+            color: var(--primary);
+            margin-left: 0.25rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--gray-50);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .help-text {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        /* File Upload */
+        .upload-area {
+            border: 3px dashed var(--gray-300);
+            border-radius: 10px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--gray-50);
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-area:hover,
+        .upload-area.drag-over {
+            border-color: var(--primary);
+            background: rgba(231, 76, 60, 0.05);
+            transform: scale(1.01);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .upload-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-subtext {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+        }
+
+        .file-list {
+            display: grid;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex: 1;
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, #C0392B 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .file-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: var(--gray-900);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-size {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+        }
+
+        .remove-file {
+            background: none;
+            border: none;
+            color: var(--gray-700);
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0.5rem;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .remove-file:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1.1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, #C0392B 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            width: 100%;
+            justify-content: center;
+            font-size: 1.15rem;
+            padding: 1.25rem 2rem;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            box-shadow: 0 6px 25px rgba(231, 76, 60, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.08) 0%, rgba(243, 156, 18, 0.08) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .info-box-title {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .info-box-content {
+            font-size: 0.95rem;
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+
+        .info-box-content ul {
+            margin-top: 0.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .info-box-content li {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Success Message */
+        .success-container {
+            display: none;
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            animation: fadeInUp 0.4s ease-out;
+            border-top: 4px solid var(--success);
+        }
+
+        .success-container.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--success) 0%, #229954 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .success-text {
+            color: var(--gray-700);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Error Message */
+        .error-message {
+            display: none;
+            background: #FADBD8;
+            border: 2px solid var(--primary);
+            color: #922B21;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .error-message.active {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            color: var(--gray-700);
+        }
+
+        .footer-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-tagline {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-mission {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--gray-700);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            header {
+                padding: 2rem 1rem;
+            }
+
+            .form-card {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌍 GLOBAL ADVANCE</h1>
+        <p class="subtitle">Impact Report Request Form</p>
+        <div class="tagline">IGNITING CHANGEMAKERS • FULFILLING THE GREAT COMMISSION</div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <!-- Form -->
+            <form id="reportForm" class="form-card">
+                <!-- Section 1: Your Information -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-number">1</div>
+                        <h2 class="section-title">Your Information</h2>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Your Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required placeholder="e.g., David Shibley">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">Your Role/Position</label>
+                            <input type="text" id="role" name="role" placeholder="e.g., Regional Director, Ambassador">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Your Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="e.g., yourname@globaladvance.org">
+                        <p class="help-text">We'll send the completed report to this email</p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="region">Region/Country</label>
+                            <input type="text" id="region" name="region" placeholder="e.g., Latin America, Brazil, East Africa">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="program">Program/Initiative</label>
+                            <select id="program" name="program">
+                                <option value="">Select program...</option>
+                                <option value="marketplace">Marketplace Missions</option>
+                                <option value="frontline">Frontline Pastors</option>
+                                <option value="esther">Esther Initiative (Women Leaders)</option>
+                                <option value="nextgen">NextGen Engagement</option>
+                                <option value="dsi">David Shibley Institute</option>
+                                <option value="alpha">Alpha Relief</option>
+                                <option value="strategic">Strategic Assistance</option>
+                                <option value="ambassador">Ambassador Network</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Report Type -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-number">2</div>
+                        <h2 class="section-title">Report Type</h2>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reportType">What kind of report do you need? <span class="required">*</span></label>
+                        <select id="reportType" name="reportType" required>
+                            <option value="">Select report type...</option>
+                            <option value="conference">🎯 Conference/Training Event Report</option>
+                            <option value="impact">📊 Program Impact Report (Monthly/Quarterly)</option>
+                            <option value="testimony">💬 Changemaker Testimony Compilation</option>
+                            <option value="regional">🌍 Regional/Country Update</option>
+                            <option value="donor">💝 Donor Impact Snapshot</option>
+                            <option value="project">🏗️ Project Progress Report</option>
+                            <option value="network">🤝 Ambassador Network Update</option>
+                        </select>
+                    </div>
+
+                    <div class="info-box" id="reportTypeInfo" style="display: none;">
+                        <div class="info-box-title">💡 About This Report Type</div>
+                        <div class="info-box-content" id="reportTypeDescription"></div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Upload Content -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-number">3</div>
+                        <h2 class="section-title">Upload Photos & Content</h2>
+                    </div>
+
+                    <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                        <div class="upload-icon">📸</div>
+                        <div class="upload-text">Click to upload or drag & drop</div>
+                        <div class="upload-subtext">Conference photos, testimonials, project images, social media screenshots</div>
+                    </div>
+                    <input 
+                        type="file" 
+                        id="fileInput" 
+                        multiple 
+                        accept="image/*"
+                        style="display: none"
+                    >
+
+                    <div class="file-list" id="fileList"></div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">✅ What to Upload</div>
+                        <div class="info-box-content">
+                            <ul>
+                                <li><strong>Conference/Training:</strong> Event photos, speaker shots, participant engagement, venue</li>
+                                <li><strong>Testimonials:</strong> Changemaker photos, before/after, business/ministry photos</li>
+                                <li><strong>Projects:</strong> Progress photos, community impact, infrastructure, team</li>
+                                <li><strong>Social Media:</strong> Screenshots of posts showcasing impact</li>
+                                <li><strong>General:</strong> Any visual content showing Kingdom impact</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Report Details -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-number">4</div>
+                        <h2 class="section-title">Report Details</h2>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="timePeriod">Time Period / Event Date <span class="required">*</span></label>
+                            <input type="text" id="timePeriod" name="timePeriod" required placeholder="e.g., Q1 2026, January 2026, March 15-17">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="audience">Intended Audience <span class="required">*</span></label>
+                            <select id="audience" name="audience" required>
+                                <option value="">Select audience...</option>
+                                <option value="donors">Donors/Supporters</option>
+                                <option value="board">Board Members</option>
+                                <option value="ambassadors">Ambassador Network</option>
+                                <option value="churches">Partner Churches</option>
+                                <option value="staff">Internal Team</option>
+                                <option value="grant">Grant Application</option>
+                                <option value="social">Social Media/Public</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="keyMetrics">Key Metrics (if known)</label>
+                        <input type="text" id="keyMetrics" name="keyMetrics" placeholder="e.g., 150 leaders trained, 45 businesses launched, 12 churches planted">
+                        <p class="help-text">Number of people impacted, leaders trained, churches planted, businesses started, etc.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="highlights">Key Highlights/Outcomes</label>
+                        <textarea id="highlights" name="highlights" placeholder="What were the most significant outcomes or stories from this event/period?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="context">Additional Context/Special Instructions</label>
+                        <textarea id="context" name="context" placeholder="e.g., Emphasize marketplace transformation, Include specific testimonies from attendees, Focus on spiritual + economic capital lift"></textarea>
+                        <p class="help-text">Any specific angles, stories, or elements to emphasize</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadline">When do you need this? <span class="required">*</span></label>
+                        <select id="deadline" name="deadline" required>
+                            <option value="">Select deadline...</option>
+                            <option value="urgent">🔴 Urgent (24-48 hours)</option>
+                            <option value="week">🟡 This Week</option>
+                            <option value="twoweeks">🟢 Within 2 Weeks</option>
+                            <option value="flexible">⚪ Flexible (No rush)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <span>🚀</span> Submit Report Request
+                </button>
+
+                <div class="error-message" id="errorMessage"></div>
+            </form>
+
+            <!-- Success Message -->
+            <div class="success-container" id="successContainer">
+                <div class="success-icon">✓</div>
+                <h3 class="success-title">Request Submitted Successfully!</h3>
+                <div class="success-text">
+                    <p style="margin-bottom: 1rem;">Your content and details have been packaged and downloaded.</p>
+                    <p style="font-weight: 600; color: var(--secondary); margin-bottom: 1rem;">
+                        📧 Next Step: Email the downloaded ZIP file to the communications team
+                    </p>
+                    <p style="font-size: 0.95rem;">
+                        Expected turnaround: <span id="deadlineText" style="font-weight: 600; color: var(--primary)"></span>
+                    </p>
+                </div>
+                <button class="btn btn-primary" onclick="resetForm()" style="margin-top: 2rem; width: auto;">
+                    <span>🔄</span> Submit Another Request
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h3 class="footer-title">GLOBAL ADVANCE</h3>
+        <p class="footer-tagline">Igniting Changemakers Worldwide</p>
+        <p class="footer-mission">Empowering catalytic leaders to fulfill the Great Commission</p>
+    </footer>
+
+    <script>
+        // State
+        let uploadedFiles = [];
+
+        // Report type descriptions
+        const reportDescriptions = {
+            conference: {
+                title: 'Conference/Training Event Report',
+                description: 'Document training events, conferences, or gatherings. Perfect for showcasing how leaders were equipped and ignited. Upload 10-20 photos from the event.'
+            },
+            impact: {
+                title: 'Program Impact Report',
+                description: 'Comprehensive overview of program outcomes over a period. Great for showing how changemakers lifted spiritual + economic capital. Upload 10-20 photos.'
+            },
+            testimony: {
+                title: 'Changemaker Testimony Compilation',
+                description: 'Showcase transformational stories from frontline leaders. Perfect for demonstrating Kingdom impact through individual lives. Upload 5-10 testimonial photos.'
+            },
+            regional: {
+                title: 'Regional/Country Update',
+                description: 'Document progress and impact in a specific region or nation. Great for Ambassador Network and strategic partners. Upload 8-15 photos.'
+            },
+            donor: {
+                title: 'Donor Impact Snapshot',
+                description: 'Quick, compelling overview of impact for donor communications. One-page format highlighting key wins. Upload 3-5 high-impact photos.'
+            },
+            project: {
+                title: 'Project Progress Report',
+                description: 'Document specific project milestones and outcomes. Perfect for strategic assistance and relief initiatives. Upload 5-10 project photos.'
+            },
+            network: {
+                title: 'Ambassador Network Update',
+                description: 'Keep ambassadors informed and engaged with field progress. Emphasize partnership and collaborative impact. Upload 8-12 photos.'
+            }
+        };
+
+        const deadlineTexts = {
+            urgent: '24-48 hours',
+            week: 'within this week',
+            twoweeks: 'within 2 weeks',
+            flexible: 'when ready'
+        };
+
+        // Initialize
+        window.onload = function() {
+            // Report type change handler
+            document.getElementById('reportType').addEventListener('change', function(e) {
+                const infoBox = document.getElementById('reportTypeInfo');
+                const description = document.getElementById('reportTypeDescription');
+                
+                if (e.target.value && reportDescriptions[e.target.value]) {
+                    const report = reportDescriptions[e.target.value];
+                    description.innerHTML = `<strong>${report.title}:</strong> ${report.description}`;
+                    infoBox.style.display = 'block';
+                } else {
+                    infoBox.style.display = 'none';
+                }
+            });
+
+            // Drag and drop
+            const uploadArea = document.getElementById('uploadArea');
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('drag-over');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('drag-over');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('drag-over');
+                handleFiles(e.dataTransfer.files);
+            });
+
+            // File input change
+            document.getElementById('fileInput').addEventListener('change', function(e) {
+                handleFiles(e.target.files);
+            });
+
+            // Form submit
+            document.getElementById('reportForm').addEventListener('submit', handleSubmit);
+        };
+
+        // Handle File Upload
+        function handleFiles(files) {
+            const fileList = document.getElementById('fileList');
+            
+            Array.from(files).forEach(file => {
+                // Validate
+                if (!file.type.startsWith('image/')) {
+                    showError(`${file.name} is not an image file`);
+                    return;
+                }
+                
+                if (file.size > 10 * 1024 * 1024) {
+                    showError(`${file.name} is too large (max 10MB)`);
+                    return;
+                }
+
+                // Check for duplicates
+                if (uploadedFiles.some(f => f.name === file.name && f.size === file.size)) {
+                    return;
+                }
+
+                // Add to list
+                uploadedFiles.push(file);
+                
+                // Display
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-icon">📷</div>
+                        <div class="file-details">
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${formatFileSize(file.size)}</div>
+                        </div>
+                    </div>
+                    <button type="button" class="remove-file" onclick="removeFile('${file.name}', ${file.size})">✕</button>
+                `;
+                fileList.appendChild(fileItem);
+            });
+        }
+
+        // Remove File
+        function removeFile(filename, size) {
+            uploadedFiles = uploadedFiles.filter(f => !(f.name === filename && f.size === size));
+            
+            const fileList = document.getElementById('fileList');
+            Array.from(fileList.children).forEach(item => {
+                if (item.textContent.includes(filename)) {
+                    item.remove();
+                }
+            });
+        }
+
+        // Format File Size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        // Handle Form Submit
+        async function handleSubmit(e) {
+            e.preventDefault();
+            
+            const errorEl = document.getElementById('errorMessage');
+            errorEl.classList.remove('active');
+            
+            // Validate files
+            if (uploadedFiles.length === 0) {
+                showError('Please upload at least one photo or screenshot');
+                return;
+            }
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                role: document.getElementById('role').value,
+                email: document.getElementById('email').value,
+                region: document.getElementById('region').value,
+                program: document.getElementById('program').value,
+                reportType: document.getElementById('reportType').value,
+                timePeriod: document.getElementById('timePeriod').value,
+                audience: document.getElementById('audience').value,
+                keyMetrics: document.getElementById('keyMetrics').value,
+                highlights: document.getElementById('highlights').value,
+                context: document.getElementById('context').value,
+                deadline: document.getElementById('deadline').value,
+                submittedAt: new Date().toISOString()
+            };
+
+            // Disable submit button
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>⏳</span> Packaging files...';
+
+            try {
+                // Create ZIP file
+                await createZipAndDownload(formData, uploadedFiles);
+
+                // Show success message
+                const deadlineText = deadlineTexts[formData.deadline] || 'soon';
+                document.getElementById('deadlineText').textContent = deadlineText;
+                
+                document.getElementById('reportForm').classList.add('hidden');
+                document.getElementById('successContainer').classList.add('active');
+
+            } catch (error) {
+                console.error('Error creating package:', error);
+                showError('Error packaging files. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>🚀</span> Submit Report Request';
+            }
+        }
+
+        // Create ZIP and Download
+        async function createZipAndDownload(formData, files) {
+            const zip = new JSZip();
+
+            // Get report type name
+            const reportTypeName = reportDescriptions[formData.reportType]?.title || formData.reportType;
+
+            // Add info.txt file with form data
+            const infoContent = `
+GLOBAL ADVANCE - IMPACT REPORT REQUEST
+======================================
+
+REQUESTER INFORMATION:
+- Name: ${formData.name}
+- Role: ${formData.role || 'Not specified'}
+- Email: ${formData.email}
+- Region/Country: ${formData.region || 'Not specified'}
+- Program: ${formData.program || 'Not specified'}
+- Submitted: ${new Date(formData.submittedAt).toLocaleString()}
+
+REPORT DETAILS:
+- Type: ${reportTypeName}
+- Time Period/Event: ${formData.timePeriod}
+- Intended Audience: ${formData.audience}
+- Deadline: ${deadlineTexts[formData.deadline]}
+
+KEY METRICS:
+${formData.keyMetrics || 'Not provided'}
+
+KEY HIGHLIGHTS/OUTCOMES:
+${formData.highlights || 'Not provided'}
+
+ADDITIONAL CONTEXT:
+${formData.context || 'None provided'}
+
+PHOTOS/CONTENT:
+${files.map((f, i) => `${i + 1}. ${f.name} (${formatFileSize(f.size)})`).join('\n')}
+
+Total Files: ${files.length}
+
+---
+TO PROCESS:
+1. Upload all photos to Claude AI
+2. Request: "Generate ${reportTypeName} from these photos for ${formData.timePeriod}"
+3. Context: ${formData.context || 'Standard Global Advance impact report'}
+4. Audience: ${formData.audience}
+5. Download generated report
+6. Email to: ${formData.email}
+
+GLOBAL ADVANCE CONTEXT:
+- Focus on "changemakers" - catalytic leaders in church + marketplace
+- Emphasize spiritual AND economic capital lift
+- Highlight Great Commission fulfillment
+- Include transformation stories from indigenous/national leaders
+- Connect to relevant initiative: ${formData.program || 'General impact'}
+            `.trim();
+
+            zip.file('REPORT-REQUEST-INFO.txt', infoContent);
+
+            // Add all photo files
+            const photosFolder = zip.folder('photos');
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                photosFolder.file(file.name, file);
+            }
+
+            // Generate ZIP
+            const blob = await zip.generateAsync({ type: 'blob' });
+
+            // Download
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            const safeName = formData.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+            a.download = `GlobalAdvance-Report-${safeName}-${Date.now()}.zip`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Reset Form
+        function resetForm() {
+            uploadedFiles = [];
+            document.getElementById('reportForm').reset();
+            document.getElementById('fileList').innerHTML = '';
+            document.getElementById('reportTypeInfo').style.display = 'none';
+            
+            document.getElementById('successContainer').classList.remove('active');
+            document.getElementById('reportForm').classList.remove('hidden');
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>🚀</span> Submit Report Request';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show Error
+        function showError(message) {
+            const errorEl = document.getElementById('errorMessage');
+            errorEl.textContent = message;
+            errorEl.classList.add('active');
+            setTimeout(() => {
+                errorEl.classList.remove('active');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
